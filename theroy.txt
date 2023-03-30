@@ -1,0 +1,59 @@
+An example pallate image file.
+
+|89 50 4E 47 0D 0A 1A 0A| Magic number
+|-----------------------|
+|00 00 00 13|49 48 44 52| 13 byte IHDR
+|00 00 00 10|00 00 00 10| Image is 16 by 16
+|02|03|00 00|00|          2bpp palate not interlaced
+|xx xx xx xx|             CRC32
+|-----------------------|
+|00 00 00 0C|50 4C 54 45| 12 byte palate
+|00 00 00|FF 00 00|00 FF  black, red, green
+ 00|00 00 FF|xx xx xx xx| blue, CRC32
+|-----------------------|
+|xx xx xx xx|49 44 41 54| xx byte data
+
+|xx xx xx xx|             CRC32
+|-----------------------|
+|00 00 00 00|49 45 4E 44| end of file
+|xx xx xx xx|             CRC32
+
+
+
+
+RAW PIXELS:
+
+00=No filter
+
+               Pixels are packed very close together.
+00 11 11 11 11 0x11 = 00 01 00 01
+00 BB BB BB BB 0xBB = 10 11 10 11
+00 11 11 11 11
+00 BB BB BB BB
+00 11 11 11 11
+00 BB BB BB BB
+00 11 11 11 11
+00 BB BB BB BB
+00 11 11 11 11
+00 BB BB BB BB
+00 11 11 11 11
+00 BB BB BB BB
+00 11 11 11 11
+00 BB BB BB BB
+00 11 11 11 11
+00 BB BB BB BB
+
+
+
+001111111100BBBBBBBB001111111100BBBBBBBB001111111100BBBBBBBB0011
+11111100BBBBBBBB001111111100BBBBBBBB001111111100BBBBBBBB00111111
+1100BBBBBBBB001111111100BBBBBBBB
+
+Put this in the DELATE compression algorythm
+
+A series of blocks.
+Each block is LZ77 compressed, and followed by a huffman code.
+
+Stage 1:
+
+0b000 0x001111111100BBBBBBBB 0b0?? 
